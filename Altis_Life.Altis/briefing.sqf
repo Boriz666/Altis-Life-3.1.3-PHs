@@ -11,6 +11,7 @@ player createDiarySubject ["illegalitems","Illegale Aktivitäten"];
 //player createDiarySubject ["terrorrules","Terrorism Rules"];
 player createDiarySubject ["controls","Steuerung"];
 
+
 /*  Example
 	player createDiaryRecord ["", //Container
 		[
