@@ -1,26 +1,27 @@
-author = "TAW_Tonic";
-onLoadName = "Altis Life RPG v3.1.3";
-onLoadMission = "A RPG game mode developed by Tonic";
+author = "TAW_Tonic edited by [PHs]";
+onLoadName = "Jelly Life RPG v3.3.0";
+onLoadMission = "developed by TAW_Tonic edit by [PHs]";
 joinUnassigned = 1;
 respawn = BASE;
-respawndelay = 5;
+respawndelay = 10;
 disabledAI = true;
 disableChannels[]={0,1,2};
 enableDebugConsole = 1;
+loadScreen = "images\loadScreen.jpg";
 
 class Header
 {
 	gameType = RPG;
 	minPlayers = 1;
-	maxPlayers = 75;
+	maxPlayers = 100;
 };
 
 wreckLimit = 3;
 wreckRemovalMinTime = 60;
 wreckRemovalMaxTime = 320;
-corpseLimit = 150;
-corpseRemovalMinTime = 999;
-corpseRemovalMaxTime = 9999;
+corpseLimit = 5;
+corpseRemovalMinTime = 10;
+corpseRemovalMaxTime = 30;
 
 #include "dialog\MasterHandler.h"
 
@@ -44,11 +45,34 @@ class CfgSounds
     sound[] = {"\sounds\Siren_Long.ogg", 1.0, 1};
     titles[] = {};
   };
+    class bankalarm
+  {
+    name = "bankalarm";
+    sound[] = {"\sounds\bankalarm.ogg", 1, 1};
+    titles[] = {};
+  };
+     class Flashbang
+  {
+    name = "Flashbang";
+    sound[] = {"\sounds\flashbang.ogg", 1.0, 1};
+    titles[] = {};
+  };
     class tazersound
   {
     name = "Tazersound";
     sound[] = {"\sounds\tazer.ogg", 0.25, 1};
     titles[] = {};
+  };
+    class welcome
+  {
+    name = "welcome";
+    sound[] = {"\sounds\bob.ogg", 1.0, 1};
+    titles[] = {};
+  };
+  class Cuff {
+	name = "cuff";
+	sound[] = {"\sounds\cuff.ogg", 0.95, 0.95};
+	titles[] = {};
   };
 };
 
@@ -56,9 +80,9 @@ class CfgDebriefing
 {
 	class NotWhitelisted
 	{
-		title = "Mission Failed";
-		subtitle = "You are not white-listed to use this slot";
-		description = "You are not allowed to use this slot because you do not have the appropriate permissions, try another slot.";
+		title = "Mission gescheitert";
+		subtitle = "nicht gewhitelisted als cop!";
+		description = "Dir ist es nicht erlaubt einen gewhitelisteten Slot auszuwählen, wende dich an einen Admin";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = {0,0.3,0.6,1};
@@ -66,19 +90,9 @@ class CfgDebriefing
 	
 	class Blacklisted
 	{
-		title = "Mission Failed";
-		subtitle = "You are blacklisted from cops";
-		description = "You are not allowed to be a cop due to previous actions and the admins have removed you from being a cop.";
-		pictureBackground = "";
-		picture = "";
-		pictureColor[] = {0,0.3,0.6,1};
-	};
-	
-	class SpyGlass
-	{
-		title = "The SpyGlass sees you";
-		subTitle = "You were detected by the SpyGlass";
-		description = "You were detected for cheating and have been reported to the server. Enjoy your day.";
+		title = "Mission gescheitert";
+		subtitle = "Du bist als Cop geblacklisted!";
+		description = "Dir ist es nicht erlaubt den Copslot zu benutzen, wende dich an einen Admin";
 		pictureBackground = "";
 		picture = "";
 		pictureColor[] = {0,0.3,0.6,1};
@@ -87,18 +101,9 @@ class CfgDebriefing
 
 class CfgNotifications
 {
-	class MedicalRequestEmerg
-	{
-		title = "EMS Requested";
-		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
-		description = "%1";
-		duration = 5;
-		priority = 7;
-	};
-	
 	class DeliveryAssigned
 	{
-		title = "Delivery Job Accepted";
+		title = "Lieferjob akzeptiert";
 		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
 		description = "%1";
 		duration = 10;
@@ -107,7 +112,7 @@ class CfgNotifications
 	
 	class DeliveryFailed
 	{
-		title = "Delivery Job Failed";
+		title = "Lieferjob fehlgeschlagen";
 		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskiconfailed_ca.paa";
 		description = "%1";
 		duration = 7;
@@ -116,7 +121,7 @@ class CfgNotifications
 	
 	class DeliverySucceeded
 	{
-		title = "Delivery Job Completed";
+		title = "Lieferjob erfolgreich";
 		iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcondone_ca.paa";
 		description = "%1";
 		duration = 6;
@@ -125,7 +130,7 @@ class CfgNotifications
 	
 	class TextMessage
 	{
-		title = "Received A Text Message";
+		title = "Textnachricht erhalten";
 		iconPicture = "icons\messagenew.paa";
 		description = "%1";
 		duration = 10;
@@ -150,12 +155,21 @@ class CfgNotifications
 		priority = 6;
 	};
 	
-	class AdminMessage
-	{
-		title = "Admin Message";
-		iconPicture = "icons\messageadmin.paa";
-		description = "%1";
-		duration = 10;
-		priority = 5;
+	class SpyGlass
+        {
+	 	title = "Das SpyGlass sieht dich :D";
+	 	subTitle = "Du wurdest von Spyglass erkannt.";
+	 	description = "Bei dir wurden cheats erkannt, du wurdest an den Serveradmin gemeldet, schönen Tag  noch!";
+	 	pictureBackground = "";
+	 	picture = "";
+	 	pictureColor[] = {0,0.3,0.6,1};
 	};
-};
+	
+	class MedicalRequestEmerg
+	{
+	 	title = "Krankenwagen Requested";
+	 	iconPicture = "\A3\ui_f\data\map\mapcontrol\taskIcon_ca.paa";
+	 	description = "%1";
+	 	duration = 5;
+	 	priority = 7;
+	};
